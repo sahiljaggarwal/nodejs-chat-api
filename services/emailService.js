@@ -1,12 +1,13 @@
 const nodemailer = require('nodemailer');
 const crypto = require('crypto');
+const config = require("../config/default.js")
 
 const transporter = nodemailer.createTransport({
   // Setup your email service provider here (e.g., Gmail, Outlook, etc.)
   service: 'Gmail', // Set the email service provider (Gmail in this case)
   auth: {
-    user: 'sahiljaggarwal6@gmail.com', // Your email address
-    pass: 'psemifmkbjgapcnf', // Your email account password or application-specific password
+    user: config.gmail, // Your email address
+    pass: config.gmailPassword, // Your email account password or application-specific password
   },
 });
 
@@ -18,7 +19,7 @@ const sendVerificationEmail = async (email, verificationOTP) => {
   try {
     const otp = verificationOTP;
     const mailOptions = {
-      from: 'sahiljaggarwal6@gmail.com',
+      from: config.gmail,
       to: email,
       subject: 'Email Verification OTP',
       text: `Your OTP for email verification is: ${otp}`,
